@@ -1,0 +1,6 @@
+.idea
+node_modules/express/*
+node_modules/jade/*
+node_modules/jayson/*
+node_modules/lodash/*
+node_modules/.bin/*
