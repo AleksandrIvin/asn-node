@@ -17,12 +17,13 @@ if (process.env.ODOO_SSL.trim() === 'yes') {
     Odoo = require(ODOO_LIB);
 }
 
+var serverTitle = process.env.SERVER_TITLE.trim();
 odooHost = process.env.ODOO_HOST.trim();
 odooPort = process.env.ODOO_PORT.trim();
 odooDatabase = process.env.ODOO_DB.trim();
 odooUsername = process.env.ODOO_USERNAME.trim();
 odooPassword = process.env.ODOO_PASSWORD.trim();
-shipmentStates = ['draft'];
+shipmentStates = ['draft', 'packed'];
 
 console.log(odooUsername + '@' + odooHost + ':' + odooPort + ':' + odooDatabase);
 console.log(odooHost, odooPort, odooDatabase);
@@ -192,7 +193,11 @@ app.get('/odoo/get-shipment-asn-distinct-cartons/:id', function (req, res) {
 
 // Test page
 app.get('/', function (req, res) {
-    res.render('index', {title: 'Localhost NodeJs Test', header: 'NodeJs Test Passed!'});
+    res.render('index', {title: 'Localhost NodeJs Test', header: 'NodeJs Test Passed!', serverTitle: serverTitle});
+});
+
+app.get('/about-me/', function (req, res) {
+    res.send({"serverTitle": serverTitle});
 });
 
 // Start server on 3000

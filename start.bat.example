@@ -15,6 +15,7 @@ set ODOO_PORT=80
 set ODOO_DB=
 set ODOO_USERNAME=
 set ODOO_PASSWORD=
+set SERVER_TITLE=Local Server Title
 
 :: Start node
 node app.js
