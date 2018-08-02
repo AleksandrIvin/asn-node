@@ -83,38 +83,13 @@ app.get('/odoo/get-shipment/:id', function (req, res) {
         // Get a partner
         odoo.get('amazon_docs.shipment', {
             ids: [parseInt(req.params.id)],
-            fields: ['id', 'name_rec', 'name', 'state']
+            fields: ['id', 'name_rec', 'name', 'state', 'po_unique', 'total_packages']
         }, function (err, shipment) {
             if (err) {
                 return console.log(err);
             }
 
             console.log('Shipment: ', shipment);
-            res.send(JSON.stringify(shipment));
-        });
-    });
-
-    //res.send('ok');
-
-});
-
-app.get('/odoo/get-shipment-po-list/:id', function (req, res) {
-    //Connect to Odoo
-    odoo.connect(function (err) {
-        if (err) {
-            return console.log(err);
-        }
-
-        // Get PO list
-        odoo.get('amazon_docs.shipment', {
-            ids: [parseInt(req.params.id)],
-            fields: ['id', 'po_unique']
-        }, function (err, shipment) {
-            if (err) {
-                return console.log(err);
-            }
-
-            console.log('PO list: ', shipment);
             res.send(JSON.stringify(shipment));
         });
     });
