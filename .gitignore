@@ -1,6 +1,6 @@
+start.bat
+package-lock.json
 .idea
-node_modules/express/*
-node_modules/jade/*
-node_modules/jayson/*
-node_modules/lodash/*
-node_modules/.bin/*
+node_modules/*
+!node_modules/odoo/*
+!node_modules/odoo_ssl/*
