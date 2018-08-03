@@ -67,7 +67,6 @@ app.get('/odoo/get-shipment-list', function (req, res) {
     return;
 });
 
-
 app.param('id', function (req, res, next, id) {
     console.log('id param: ', id);
     next();
@@ -91,6 +90,31 @@ app.get('/odoo/get-shipment/:id', function (req, res) {
             }
 
             console.log('Shipment: ', shipment);
+            res.send(JSON.stringify(shipment));
+        });
+    });
+
+    //res.send('ok');
+
+});
+
+app.get('/odoo/get-shipment-po-list/:id', function (req, res) {
+    //Connect to Odoo
+    odoo.connect(function (err) {
+        if (err) {
+            return console.log(err);
+        }
+
+        // Get PO list
+        odoo.get('amazon_docs.shipment', {
+            ids: [parseInt(req.params.id)],
+            fields: ['id', 'po_unique']
+        }, function (err, shipment) {
+            if (err) {
+                return console.log(err);
+            }
+
+            console.log('PO list: ', shipment);
             res.send(JSON.stringify(shipment));
         });
     });
