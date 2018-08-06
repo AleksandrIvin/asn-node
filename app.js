@@ -67,7 +67,6 @@ app.get('/odoo/get-shipment-list', function (req, res) {
     return;
 });
 
-
 app.param('id', function (req, res, next, id) {
     console.log('id param: ', id);
     next();
@@ -84,7 +83,7 @@ app.get('/odoo/get-shipment/:id', function (req, res) {
         // Get a partner
         odoo.get('amazon_docs.shipment', {
             ids: [parseInt(req.params.id)],
-            fields: ['id', 'name_rec', 'name', 'state']
+            fields: ['id', 'name_rec', 'name', 'state', 'po_unique', 'total_packages']
         }, function (err, shipment) {
             if (err) {
                 return console.log(err);
