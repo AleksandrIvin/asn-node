@@ -72,6 +72,25 @@ app.param('id', function (req, res, next, id) {
     next();
 });
 
+app.post('/odoo/set-odoo-shipment-asn/:id/:asn', function (req, res) {
+    console.log('odoo/set-odoo-shipment-asn/:id/:asn', req.params.id, req.params.asn);
+    //Connect to Odoo
+    odoo.connect(function (err) {
+        if (err) {
+            return console.log(err);
+        }
+        // Set ASN
+        odoo.update('amazon_docs.shipment', parseInt(req.params.id), {'asn': req.params.asn},
+            function (err, shipment) {
+                if (err) {
+                    return console.log(err);
+            }
+            console.log('Shipment: ', shipment);
+            res.send(JSON.stringify({'asn': req.params.asn}));
+        });
+    });
+});
+
 app.get('/odoo/get-shipment/:id', function (req, res) {
     console.log('odoo/get-shipment/:id', req.params.id); //, app.getParameter(id)
     //Connect to Odoo
@@ -83,7 +102,9 @@ app.get('/odoo/get-shipment/:id', function (req, res) {
         // Get a partner
         odoo.get('amazon_docs.shipment', {
             ids: [parseInt(req.params.id)],
-            fields: ['id', 'name_rec', 'name', 'state', 'po_unique', 'total_packages']
+            fields: ['id', 'name_rec', 'name',
+                    'state', 'po_unique', 'total_packages',
+                    'track_no', 'total_euro_pallets']
         }, function (err, shipment) {
             if (err) {
                 return console.log(err);
