@@ -104,7 +104,7 @@ app.get('/odoo/get-shipment/:id', function (req, res) {
             ids: [parseInt(req.params.id)],
             fields: ['id', 'name_rec', 'name',
                     'state', 'po_unique', 'total_packages',
-                    'track_no', 'total_euro_pallets']
+                    'track_no', 'total_pallets']
         }, function (err, shipment) {
             if (err) {
                 return console.log(err);
