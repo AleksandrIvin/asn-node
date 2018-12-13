@@ -23,7 +23,7 @@ odooPort = process.env.ODOO_PORT.trim();
 odooDatabase = process.env.ODOO_DB.trim();
 odooUsername = process.env.ODOO_USERNAME.trim();
 odooPassword = process.env.ODOO_PASSWORD.trim();
-shipmentStates = ['draft', 'packed'];
+shipmentStates = ['draft', 'packed', 'shipped'];
 
 console.log(odooUsername + '@' + odooHost + ':' + odooPort + ':' + odooDatabase);
 console.log(odooHost, odooPort, odooDatabase);
