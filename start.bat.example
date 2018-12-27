@@ -16,6 +16,7 @@ set ODOO_DB=
 set ODOO_USERNAME=
 set ODOO_PASSWORD=
 set SERVER_TITLE=Local Server Title
+set STATE_LIST=state1,state2,state3
 
 :: Start node
 node app.js
