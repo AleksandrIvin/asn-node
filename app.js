@@ -26,6 +26,9 @@ odooPassword = process.env.ODOO_PASSWORD.trim();
 
 shipmentStatesDefault = ['draft', 'packed', 'shipped'];
 shipmentStates = process.env.STATE_LIST ? process.env.STATE_LIST.split(',') : shipmentStatesDefault;
+deliveryMethodIds = process.env.DELIVERY_METOD_ID_LIST.split(',').map(function(i){
+    return parseInt(i, 10);
+});
 
 console.log(odooUsername + '@' + odooHost + ':' + odooPort + ':' + odooDatabase);
 console.log(odooHost, odooPort, odooDatabase);
@@ -52,7 +55,7 @@ app.get('/odoo/get-shipment-list', function (req, res) {
 
         // Get a partner
         odoo.search_read('amazon_docs.shipment', {
-            domain: [['state', 'in', shipmentStates]],
+            domain: [['state', 'in', shipmentStates], ['delivery_method_id', 'in', deliveryMethodIds]],
             fields: ['id', 'name_rec'],
             limit: 100
         }, function (err, shipment) {
