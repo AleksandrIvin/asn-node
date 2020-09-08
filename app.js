@@ -46,6 +46,11 @@ app.set('view engine', 'jade');
 // allow self signed certificate
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+})
+
 app.get('/odoo/get-shipment-list', function (req, res) {
     // Connect to Odoo
     odoo.connect(function (err) {
